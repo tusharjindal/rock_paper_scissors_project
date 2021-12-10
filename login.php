@@ -49,7 +49,7 @@
         }
         .container form{
             width: 100%;
-            height: 40%;
+            height: 44%;
             padding: 20px;
             background: white;
             border-radius: 4px;
@@ -91,6 +91,9 @@
             opacity: .7;
 
         }
+        .container form .para-2{
+            margin: 15px 0 18px 0;
+        }
     </style>
 </head>
 <body style="background-color:blue;"> 
@@ -110,8 +113,10 @@
             <div>     
                 <input type =  "submit" class="btn" id = "submit" value = "Login" />  
             </div>  
+            <p class="para-2">Not have a account? <a href="signup.php">Sign up here</a></p>
    </form>  
 </div>
+   <!--  -->
    <script>  
             function check()  
             {  
