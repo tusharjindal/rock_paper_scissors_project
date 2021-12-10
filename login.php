@@ -25,23 +25,93 @@
           
 ?>  
 <html>
-<head></head>
-<body> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body{
+            min-height: 100vh;
+            background: #eee;
+            display: flex;
+            font-family: sans-serif;
+        }
 
-   <h1>Welcome to stone paper scissors game. Login to proceed </h1>
+        .container{
+            margin: auto;
+            width: 500px;
+            max-width: 90%;
+        }
+        .container form{
+            width: 100%;
+            height: 40%;
+            padding: 20px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0,0,0,.3);
+        }
+        .container form h1{
+            text-align: center;
+            margin-bottom: 24px;
+            color: #222;
+
+        }
+        .container form .form-control{
+            width:100%;
+            height: 40px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid silver;
+            margin: 10px 0 18px 0;
+            padding: 0 10px;
+
+        }
+        .container form .btn{
+            margin-left: 38%;
+            transforn: translateX(-50%);
+            width: 120px;
+            height: 34px;
+            border: none;
+            outline: none;
+            background: #27a327;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: white;
+            border-radius: 4px;
+            transition: .3s;
+            
+        }
+        .container form .btn:hover{
+            opacity: .7;
+
+        }
+    </style>
+</head>
+<body style="background-color:blue;"> 
+
+   
+<div class="container">
    <form name="Login" action = " " onsubmit = "return check()" method = "POST">  
-            <p>  
-                <label> email: </label>  
-                <input type = "text" id ="email" name  = "email" />
-            </p>  
-            <p>  
+           <h1>Login</h1>
+            <div class="form-group">  
+                <label> Email: </label>  
+                <input type = "text" class="form-control" id ="email" name  = "email" />
+            </div>  
+            <div class="form-group">  
                 <label> Password: </label>  
-                <input type = "password" id ="pass" name  = "pass" />  
-            </p>  
-            <p>     
-                <input type =  "submit" id = "submit" value = "Login" />  
-            </p>  
+                <input type = "password" class="form-control" id ="pass" name  = "pass" />  
+            </div>  
+            <div>     
+                <input type =  "submit" class="btn" id = "submit" value = "Login" />  
+            </div>  
    </form>  
+</div>
    <script>  
             function check()  
             {  
