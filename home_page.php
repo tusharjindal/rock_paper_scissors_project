@@ -4,7 +4,8 @@
    <button type="button">Play Game</button>
    <button type="button">Dashboard</button>
    <button type="button">change password</button>
-   </body></html?
+   </body>
+   </html>
 
    
 
