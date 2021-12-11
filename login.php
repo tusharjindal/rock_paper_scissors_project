@@ -15,11 +15,12 @@
         $row=mysqli_fetch_array($result,MYSQLI_ASSOC);  
         $count = mysqli_num_rows($result);  
         if($count == 1){  
-           echo "<h1><center> Login successful </center></h1>";  
+            //when login is successful 
            header("Location: home_page.php");
         }  
         else{  
-           echo "<h1> Login failed. Invalid username or password.</h1>";  
+           echo "<h1> Login failed. Invalid username or password.</h1>";
+           //alert("Invalid username or password");  
         }   
    }
           
@@ -104,11 +105,11 @@
            <h1>Login</h1>
             <div class="form-group">  
                 <label> Email: </label>  
-                <input type = "text" class="form-control" id ="email" name  = "email" />
+                <input type = "text" class="form-control" id ="email" name  = "email" required/>
             </div>  
             <div class="form-group">  
                 <label> Password: </label>  
-                <input type = "password" class="form-control" id ="pass" name  = "pass" />  
+                <input type = "password" class="form-control" id ="pass" name  = "pass" required/>  
             </div>  
             <div>     
                 <input type =  "submit" class="btn" id = "submit" value = "Login" />  
@@ -116,29 +117,7 @@
             <p class="para-2">Not have a account? <a href="signup.php">Sign up here</a></p>
    </form>  
 </div>
-   <!--  -->
-   <script>  
-            function check()  
-            {  
-                var id=document.Login.email.value;  
-                var ps=document.Login.pass.value;  
-                if(id.length=="" && ps.length=="") {  
-                    alert("User Name and Password fields are empty");  
-                    return false;  
-                }  
-                else  
-                {  
-                    if(id.length=="") {  
-                        alert("User Name is empty");  
-                        return false;  
-                    }   
-                    if (ps.length=="") {  
-                    alert("Password field is empty");  
-                    return false;  
-                    }  
-                }                             
-            }  
-        </script>  
+   
 </body>
 
 </html>
