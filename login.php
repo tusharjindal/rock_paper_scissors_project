@@ -1,5 +1,6 @@
 <?php      
     include('config.php');  
+    session_start();
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $email = $_POST['email'];  
     $password = $_POST['pass'];  
@@ -16,11 +17,13 @@
         $count = mysqli_num_rows($result);  
         if($count == 1){  
             //when login is successful 
+            $_SESSION['email']=$email;
            header("Location: home_page.php");
         }  
         else{  
-           echo "<h1> Login failed. Invalid username or password.</h1>";
-           //alert("Invalid username or password");  
+           echo '<script type ="text/JavaScript">';  
+           echo 'alert("  Invalid username or password ! Kindly login again ")';  
+           echo '</script>';  
         }   
    }
           
