@@ -4,27 +4,43 @@
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $email = $_POST['email'];  
     $password = $_POST['pass'];  
-      
-        $email = stripcslashes($email);  
-        $password = stripcslashes($password);  
-        $email = mysqli_real_escape_string($db,$email);  
-        $password = mysqli_real_escape_string($db,$password);  
-      
-        $sql = "select *from user where email = '$email' and password = '$password'";  
-     
-        $result=mysqli_query($db, $sql) or die( mysqli_error($db));;  
-        $row=mysqli_fetch_array($result,MYSQLI_ASSOC);  
-        $count = mysqli_num_rows($result);  
-        if($count == 1){  
-            //when login is successful 
+        if(empty($email) || empty($password)){
+            echo '<script type ="text/JavaScript">';  
+            echo 'alert("empty login or password. Kindly login again ")';  
+            echo '</script>';
+        }
+        else{
+        $select_user="select password from user where email='$email'";
+        $run_qry=mysqli_query($db, $select_user) or die( mysqli_error($db));
+        $row=mysqli_fetch_assoc($run_qry);
+        if(md5($password)==$row['password']){
             $_SESSION['email']=$email;
-           header("Location: home_page.php");
-        }  
+            $sql_active="UPDATE `user` SET `Active`='online' WHERE email='$email'";
+            $result_active = mysqli_query($db, $sql_active);
+            header("Location: home_page.php");
+        }
+      
+        // $email = stripcslashes($email);  
+        // $password = stripcslashes($password);  
+        // $email = mysqli_real_escape_string($db,$email);  
+        // $password = mysqli_real_escape_string($db,$password);  
+      
+        // $sql = "select *from user where email = '$email' and password = '$password'";  
+     
+        // $result=mysqli_query($db, $sql) or die( mysqli_error($db));  
+        // $row=mysqli_fetch_array($result,MYSQLI_ASSOC);  
+        // $count = mysqli_num_rows($result);  
+        // if($count == 1){  
+        //     //when login is successful 
+        //     $_SESSION['email']=$email;
+        //    header("Location: home_page.php");
+        // }  
         else{  
            echo '<script type ="text/JavaScript">';  
            echo 'alert("  Invalid username or password ! Kindly login again ")';  
            echo '</script>';  
-        }   
+        }
+    }   
    }
           
 ?>  
@@ -44,7 +60,10 @@
             background: #eee;
             display: flex;
             font-family: sans-serif;
+            background-image: url('pics/background.jpg');
+
         }
+        
 
         .container{
             margin: auto;
@@ -98,9 +117,10 @@
         .container form .para-2{
             margin: 15px 0 18px 0;
         }
+
     </style>
 </head>
-<body style="background-color:blue;"> 
+<body> 
 
    
 <div class="container">
