@@ -1,4 +1,5 @@
 <?php
+
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
  session_start();
  include 'config.php';
@@ -84,7 +85,6 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         }
         .container form .btn{
             margin-left: 38%;
-            transforn: translateX(-50%);
             width: 120px;
             height: 34px;
             border: none;

@@ -10,12 +10,15 @@
             echo '</script>';
         }
         else{
-        $select_user="select password from user where email='$email'";
+        $select_user="select password,Score from user where email='$email'";
         $run_qry=mysqli_query($db, $select_user) or die( mysqli_error($db));
         $row=mysqli_fetch_assoc($run_qry);
         if(md5($password)==$row['password']){
             $_SESSION['email']=$email;
-            $sql_active="UPDATE `user` SET `Active`='online' WHERE email='$email'";
+            $_SESSION['Score']=$row['Score'];
+            $now = new DateTime('Asia/Kolkata');
+            $_SESSION['updated']= $now->format('Y-m-d H:i:s');
+            $sql_active="UPDATE `user` SET `Active`='online',`updated`=current_timestamp() WHERE email='$email'";
             $result_active = mysqli_query($db, $sql_active);
             header("Location: home_page.php");
         }
@@ -137,7 +140,7 @@
             <div>     
                 <input type =  "submit" class="btn" id = "submit" value = "Login" />  
             </div>  
-            <p class="para-2">Not have a account? <a href="signup.php">Sign up here</a></p>
+            <p class="para-2">don't have an account? <a href="signup.php">Sign up here</a></p>
    </form>  
 </div>
    

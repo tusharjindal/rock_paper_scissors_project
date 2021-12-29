@@ -7,7 +7,6 @@ if(isset($_SESSION['email'])){
   $result_active = mysqli_query($db, $sql_active);
   session_destroy();   // function that Destroys Session 
   header("Location: Login.php");
-
 }
 else{
  header("Location: Login.php");
