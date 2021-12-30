@@ -60,7 +60,7 @@ img{
 
   <div class='btn-group' style="position:absolute; left:1000px; top:310px;">
   <form >
-  <button type="submit" formaction="game.php" value="Submit">Play Game</button>
+  <button type="submit" formaction="game_radio.php" value="Submit">Play Game</button>
   <button type="submit" formaction="leader_board.php" value="Submit">Leader Board</button>
   <button type="submit" formaction="change_password.php" value="Submit">Change Password</button>
   <button type="submit" formaction="logout.php" value="Submit">Logout</button>

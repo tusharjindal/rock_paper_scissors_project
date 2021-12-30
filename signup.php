@@ -10,13 +10,19 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
  $ucl = preg_match('/[A-Z]/', $password); // Uppercase Letter
  $lcl = preg_match('/[a-z]/', $password); // Lowercase Letter
  $dig = preg_match('/\d/', $password); // Numeral
- $nos = preg_match('/\W/', $password); // Non-alpha/num characters (allows underscore)
+ $nos = preg_match('/\W/', $password); // special char
+ 
  if (empty($email) || empty($password) || empty($username)){
    
     echo '<script type ="text/JavaScript">';  
     echo 'alert("Kindly fill all three fields")';  
     echo '</script>';
 
+ }
+ elseif(filter_var($email, FILTER_VALIDATE_EMAIL)==0){
+    echo '<script type ="text/JavaScript">';  
+    echo 'alert("Kindly enter a valid email")';  
+    echo '</script>';
  }
  elseif(strlen($password)<8){
     echo '<script type ="text/JavaScript">';  
@@ -25,24 +31,25 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
  }
  elseif(!$ucl){
     echo '<script type ="text/JavaScript">';  
-    echo 'alert("Kindly match the requested format for the password")';  
-    echo '</script>';
- }
- elseif(!$lcl){
+    echo 'alert("New password should have atleast 1 uppercase letter")';  
+    echo '</script>';    
+  }
+  elseif(!$lcl){
     echo '<script type ="text/JavaScript">';  
-    echo 'alert("Kindly match the requested format for the password")';  
-    echo '</script>';
-}
-elseif(!$dig){
+    echo 'alert("New password should have atleast 1 lowercase letter")';  
+    echo '</script>';    
+  }
+  elseif(!$dig){
     echo '<script type ="text/JavaScript">';  
-    echo 'alert("Kindly match the requested format for the password")';  
-    echo '</script>';
-}
-elseif(!$nos){
+    echo 'alert("New password should have atleast 1 digit (0-9)")';  
+    echo '</script>';    
+  }
+  elseif(!$nos){
     echo '<script type ="text/JavaScript">';  
-    echo 'alert("Kindly match the requested format for the password")';  
-    echo '</script>';
-}
+    echo 'alert("New password should have atleast 1 special character")';  
+    echo '</script>';    
+  }
+
  else{
  $email_already="SELECT COUNT(*) FROM user where email='$email'";
  $run_qry_email=mysqli_query($db, $email_already) or die( mysqli_error($db));
@@ -85,8 +92,8 @@ elseif(!$nos){
             </div> 
             <div class="form-group2">  
                 <label> Password: </label>  
-                <input type = "password" class="form-control" id ="pass" name  = "pass" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required/>  
-                <span class="tooltiptext">Should be of min 8 char, a special symbol</span>
+                <input type = "password" class="form-control" id ="pass" name  = "pass" required/>  
+                <span class="tooltiptext"><li>Should be of min 8 char</li><li>A special symbol</li><li>A upper case</li><li>A lower case</li></span>
             </div>  
        
             <div>     

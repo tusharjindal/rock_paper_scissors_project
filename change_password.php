@@ -11,7 +11,36 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
  $run_qry=mysqli_query($db, $select_user) or die( mysqli_error($db));
  $row=mysqli_fetch_assoc($run_qry);
  if(md5($old)==$row['password']){
-      if($pass_new==$pass_new_re){
+      $ucl = preg_match('/[A-Z]/', $pass_new); // Uppercase Letter
+      $lcl = preg_match('/[a-z]/', $pass_new); // Lowercase Letter
+      $dig = preg_match('/\d/', $pass_new); // Numeral
+      $nos = preg_match('/\W/', $pass_new); // special char
+      if(strlen($pass_new)<8){
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("New password length should be of atleast 8 characters")';  
+        echo '</script>';          
+      }
+      elseif(!$ucl){
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("New password should have atleast 1 uppercase letter")';  
+        echo '</script>';    
+      }
+      elseif(!$lcl){
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("New password should have atleast 1 lowercase letter")';  
+        echo '</script>';    
+      }
+      elseif(!$dig){
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("New password should have atleast 1 digit (0-9)")';  
+        echo '</script>';    
+      }
+      elseif(!$nos){
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("New password should have atleast 1 special character")';  
+        echo '</script>';    
+      }
+      elseif($pass_new==$pass_new_re){
         $password_encrypt=md5($pass_new);
         $sql="UPDATE `user` SET `password`='$password_encrypt' WHERE email='$email'";
         $result = mysqli_query($db, $sql);
@@ -35,10 +64,11 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 }
 ?>
 <html>
+<link rel="stylesheet" type="text/css" href="leader_board_style.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Change Password</title>
     <style>
         *{
             margin:0;

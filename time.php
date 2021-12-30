@@ -9,10 +9,9 @@ function Activity($timestamp,$email,$db)
 {
     $now = new DateTime('Asia/Kolkata');
     $current=strtotime($now->format('Y-m-d H:i:s'));
-    //$current   = time();
     $last = strtotime($timestamp);
-    $difference = round(abs($last - $current), 2);
-    if ($difference > 60) {
+    $difference =abs($last - $current);
+    if ($difference > 300) {
         return false;
     }
     else{
@@ -26,13 +25,5 @@ if($status==false){
     header("Location: Logout.php");
 }
 
-// while(true){
-//     $status = Activity($row['updated'],$email,$db);
-//     if ($status==false)
-//     {
-//         header("Location: Logout.php");
-//         break;
-//     }  
-//     sleep(5);
-// }
+
 ?>

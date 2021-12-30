@@ -1,35 +1,6 @@
 <html>
-<style>
-  table, th, td {
-        border:1px solid black;
-    }
-  body{
-        min-height: 100vh;
-        background: #eee;
-        display: flex;
-        font-family: sans-serif;
-        background-image: url('pics/background.jpg');
-    }
-  .container{
-            margin: auto;
-            width: 800px;
-            max-width: 90%;
-        }   
-  .container table{
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-            height: 70%;
-            padding: 20px;
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 8px 16px rgba(0,0,0,.3);
-        }
-   .container table .main{
-    height: 15%;
-    font-size: 40px;
-   }    
-</style>
+<link rel="stylesheet" type="text/css" href="leader_board_style.css">
+
     <head>
         <title>LeaderBoard </title>
     </head>
