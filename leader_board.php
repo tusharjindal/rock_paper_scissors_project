@@ -21,7 +21,6 @@
                 <th>Active</th>
                 <th>Score</th>
             </tr>
-            
 
 <?php
 include('config.php');  

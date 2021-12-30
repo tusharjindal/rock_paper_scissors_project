@@ -19,11 +19,25 @@ $score=$row['Score'];
 $result=array();
 $result[0]="No option selected";
 $result[1]=$score;
+
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
+  if(isset($_POST['user'])==0){
+    $user=3;
+    $computer=3;
+  }
+  else{
 $user =$_POST['user'];
 $computer = rand(0,2);
+  }
+
 function check($computer, $user, $result, $email,$db) {
-  if ( $user == $computer ) {
+
+  if($user==3 || $computer==3){
+    $result[1]=$result[1];  
+    $result[0]="Kidly select a valid option";
+    return $result;
+  }
+  elseif ( $user == $computer ) {
       $result[0]= "Tie";
       return $result;
   } 
@@ -64,11 +78,7 @@ function check($computer, $user, $result, $email,$db) {
     $result[0]="You Lose";
     return $result;
   }
-  else if($user==3){
-    $result[1]=$result[1];  
-    $result[0]="Kidly select a valid option";
-    return $result;
-  }
+  
 }
 // Check who win
 $final_result = check($computer, $user, $result, $email,$db);
@@ -94,16 +104,18 @@ else{
    background-image: url('pics/background.jpg');
   }
   .container{
-      margin: auto;
-      width: 500px;
-      max-width: 90%;
+      text-align: center;
+      width: 300;
+      height: 650px;
+      margin-top: 50px;
+      margin-left: 450px;
+
   }
  
   .container form{
-      width: 100%;
-      height: 55%;
+      width: 200%;
+      height: 80%;
       padding: 30px;
-      margin-top: 45;
       background: white;
       border-radius: 10px;
       box-shadow: 0 8px 16px rgba(0,0,0,.3);
@@ -124,27 +136,47 @@ else{
  
 }
 .container form .btns2{
-    margin-left: 55%;
-    margin-top: -20;
-    width: 120px;
-    height: 22px;
+    
+    height: 35px;
     border: none;
     outline: none;
     background: #27a327;
     cursor: pointer;
-    font-size: 16px;
     text-transform: uppercase;
     color: white;
     border-radius: 4px;
-    transition: .3s;
+    text-align: center;
+    font-size: 20px;
+    width: auto;
     
 }
 .custom-select{
   margin-top: 30;
 }
+
+.container form .low{
+  margin-top:30;
+  text-align: center;
+    font-size: x-large;
+}
+.img {
+        display: inline-block;
+        padding: 20px;
+    }
+
+.stbtn {
+  display: block;
+  text-align: center;
+  padding:20px;
+}   
+h3{
+  font-size: 25px;
+  color:green;
+}
 </style>
 <head>
 <title>Rock, Paper, Scissors Game</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
 <ul>
@@ -159,19 +191,28 @@ else{
 <div class="container">
 <form method="post">
 <ul><li><h1> Select your option </h1></li></ul>
-<div class="custom-select" style="width:200px">  
-<select name="user">
-<option value="3">Not Selected</option>
-<option value="0">Rock</option>
-<option value="1">Paper</option>
-<option value="2">Scissors</option>
-</select>
-<input type="submit" class="btns2" value="Play">
+
+<div class="low">
+  <div class="img">
+<input type="radio"  id="user" name="user" value=0>
+<label for="user" <i class="fas fa-hand-rock" style="font-size:100px"></i></label><br>
 </div>
+<div class="img">
+<input type="radio" id="user" name="user" value=1>
+<label for="user" <i class="fas fa-hand-paper" style="font-size:100px"></i></label><br>
+</div>
+<div class="img">
+<input type="radio" id="user" name="user" value=2>
+<label for="user" <i class="fas fa-hand-scissors" style="font-size:100px"></i></label>
+</div>
+</div>
+<div class="stbtn">
+<input type="submit" class="btns2" value="submit">
+  </div>
 <?php
 
-print "<br> You Played: $names[$user] <br><br> Computer Played: $names[$computer] <br>";
-print "<h2 style= color:red>$final_result[0] </h2><h3 h2 style= color:green> Score: $final_result[1]</h3>";
+print "<br><b> You Played: $names[$user] </b><br><br><b> Computer Played: $names[$computer] </b><br>";
+print "<h2 style= color:red>$final_result[0] </h2><h3> Score: $final_result[1]</h3>";
 ?>
 
 </form>

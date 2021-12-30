@@ -49,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         echo '</script>';  
         header("Location: logout.php");
       }
-
       else{
         echo '<script type ="text/JavaScript">';  
         echo 'alert("your passwords do not match. kidly enter again")';  
