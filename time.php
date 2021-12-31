@@ -11,7 +11,14 @@ function Activity($timestamp,$email,$db)
     $current=strtotime($now->format('Y-m-d H:i:s'));
     $last = strtotime($timestamp);
     $difference =abs($last - $current);
-    if ($difference > 300) {
+    if ($difference > 300 && $difference<600) {
+      
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("5 mins of inactivity recorded. you will be logged out in case of another 5 mins of inactivity")';  
+        echo '</script>';  
+        //return false;
+    }
+    elseif ($difference > 600) {
         return false;
     }
     else{
@@ -24,6 +31,5 @@ $status = Activity($row['updated'],$email,$db);
 if($status==false){
     header("Location: Logout.php");
 }
-
 
 ?>

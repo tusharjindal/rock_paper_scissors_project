@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     echo '<script type ="text/JavaScript">';  
     echo 'alert("Kindly fill all three fields")';  
     echo '</script>';
-
  }
  elseif(filter_var($email, FILTER_VALIDATE_EMAIL)==0){
     echo '<script type ="text/JavaScript">';  

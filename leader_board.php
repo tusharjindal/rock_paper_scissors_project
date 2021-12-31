@@ -11,7 +11,7 @@
         <table style="width:70%">
           <thead class="main">
              <tr>
-                <th colspan="5" >Leader Board</th>
+                <th colspan="6" >Leader Board</th>
              </tr>
           </thead>
             <tr>
@@ -19,14 +19,15 @@
                 <th>ID</th>
                 <th>Username</th>
                 <th>Active</th>
-                <th>Score</th>
+                <th>wins</th>
+                <th>lost</th>
             </tr>
 
 <?php
 include('config.php');  
 session_start();
 if(isset($_SESSION['email'])){
-    $result = mysqli_query($db, "select ID,username, Active, Score from user ORDER BY Score DESC");
+    $result = mysqli_query($db, "select ID,username, Active, Score, losses from user ORDER BY (losses/Score) DESC");
 
 $ranking = 1;
 if (mysqli_num_rows($result)) {
@@ -35,7 +36,8 @@ if (mysqli_num_rows($result)) {
         <td>{$row['ID']}</td>
         <td>{$row['username']}</td>
         <td>{$row['Active']}</td>
-        <td>{$row['Score']}</td></tr>";
+        <td>{$row['Score']}</td>
+        <td>{$row['losses']}</td></tr>";
         $ranking++;
     }
 }

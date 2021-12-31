@@ -12,14 +12,15 @@ else{
 $names = array('Rock', 'Paper', 'Scissors','Not selected');
 $user=3;  //defaultvalue
 $computer=3;
-$select_sc="select Score from user where email='$email'";
+$select_sc="select Score,losses from user where email='$email'";
 $run_qry=mysqli_query($db, $select_sc) or die( mysqli_error($db));
 $row=mysqli_fetch_assoc($run_qry);
 $score=$row['Score'];
+$lost=$row['losses'];
 $result=array();
 $result[0]="No option selected";
 $result[1]=$score;
-
+$result[2]=$lost;
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
   if(isset($_POST['user'])==0){
     $user=3;
@@ -34,6 +35,7 @@ function check($computer, $user, $result, $email,$db) {
 
   if($user==3 || $computer==3){
     $result[1]=$result[1];  
+    $result[2]=$result[2];  
     $result[0]="Kidly select a valid option";
     return $result;
   }
@@ -43,6 +45,7 @@ function check($computer, $user, $result, $email,$db) {
   } 
   else if ( $user == 0 && $computer == 2) {
     $result[1]=$result[1]+1;  
+    $result[2]=$result[2];  
     $result[0]= "You Win";
     $sql_score="UPDATE `user` SET `Score`=$result[1] WHERE email='$email'";
     $result_score = mysqli_query($db, $sql_score);
@@ -50,6 +53,7 @@ function check($computer, $user, $result, $email,$db) {
   } 
   else if ( $user == 1 && $computer == 0) {
     $result[1]=$result[1]+1;  
+    $result[2]=$result[2];  
     $result[0]= "You Win";
     $sql_score="UPDATE `user` SET `Score`=$result[1] WHERE email='$email'";
     $result_score = mysqli_query($db, $sql_score);
@@ -58,24 +62,34 @@ function check($computer, $user, $result, $email,$db) {
   } 
   else if ( $user == 2 && $computer == 1) {
     $result[1]=$result[1]+1;  
+    $result[2]=$result[2];  
     $result[0]="You Win";
     $sql_score="UPDATE `user` SET `Score`=$result[1] WHERE email='$email'";
     $result_score = mysqli_query($db, $sql_score);
     return $result;
   } 
   else if ( $user == 0 && $computer == 1) {
+    $result[2]=$result[2]+1;  
     $result[1]=$result[1];  
     $result[0]="You Lose";
+    $sql_score="UPDATE `user` SET `losses`=$result[2] WHERE email='$email'";
+    $result_score = mysqli_query($db, $sql_score);
     return $result;
   } 
   else if ( $user == 1 && $computer == 2) {
+    $result[2]=$result[2]+1;  
     $result[1]=$result[1];  
     $result[0]="You Lose";
+    $sql_score="UPDATE `user` SET `losses`=$result[2] WHERE email='$email'";
+    $result_score = mysqli_query($db, $sql_score);
     return $result;
   } 
   else if ( $user == 2 && $computer == 0) {
+    $result[2]=$result[2]+1;  
     $result[1]=$result[1];  
     $result[0]="You Lose";
+    $sql_score="UPDATE `user` SET `losses`=$result[2] WHERE email='$email'";
+    $result_score = mysqli_query($db, $sql_score);
     return $result;
   }
   
@@ -84,7 +98,7 @@ function check($computer, $user, $result, $email,$db) {
 $final_result = check($computer, $user, $result, $email,$db);
 }
 else{
-    $final_result=array("Not selected",0);
+    $final_result=array("Not selected",0,0);
 }
 ?>
 <html>
@@ -171,6 +185,12 @@ else{
 }   
 h3{
   font-size: 25px;
+  display: inline-block;
+  color:green;
+  padding: 12px;
+}
+h4{
+  font-size: 25px;
   color:green;
 }
 </style>
@@ -210,9 +230,9 @@ h3{
 <input type="submit" class="btns2" value="submit">
   </div>
 <?php
-
-print "<br><b> You Played: $names[$user] </b><br><br><b> Computer Played: $names[$computer] </b><br>";
-print "<h2 style= color:red>$final_result[0] </h2><h3> Score: $final_result[1]</h3>";
+print "<br><b> You Played: $names[$user] </b><br><b><br> Computer Played: $names[$computer] </b><br>";
+print "<h2 style= color:red>$final_result[0] </h2><h3> Win: $final_result[1]</h3>";
+print "<h3> Lost:$final_result[2]</h3>";
 ?>
 
 </form>
