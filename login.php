@@ -4,11 +4,26 @@
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $email = $_POST['email'];  
     $password = $_POST['pass'];  
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)==0){
+        echo "<script>
+        alert('Kindly enter a valid Email');
+        window.location.href='login.php';
+        </script>";
+    }
+    $email_alreadyyy="SELECT COUNT(*) FROM user where email='$email'";
+    $run_qry_emaill=mysqli_query($db, $email_alreadyyy) or die( mysqli_error($db));
+    $row_email=mysqli_fetch_assoc($run_qry_emaill);
         if(empty($email) || empty($password)){
             echo '<script type ="text/JavaScript">';  
             echo 'alert("empty login or password. Kindly login again ")';  
             echo '</script>';
         }
+        elseif($row_email['COUNT(*)']==0){
+            echo '<script type ="text/JavaScript">';  
+            echo 'alert("Email does not exists. Kindly sign up!!")';  
+            echo '</script>';
+        }
+       
         else{
         $select_user="select password,Score from user where email='$email'";
         $run_qry=mysqli_query($db, $select_user) or die( mysqli_error($db));
