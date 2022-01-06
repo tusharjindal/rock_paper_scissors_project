@@ -1,17 +1,19 @@
 <?php
 require_once ("../models/config.php");
 require_once ("../controllers/login_check.php");
-require_once ("../models/login_models.php");
+require_once ("../models/user_mod.php");
 session_start();
+////post method
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
 $email = $_POST['email'];  
 $password = $_POST['pass'];  
 
+///function to check validation
 $check= new login_done();
 $is_valid=$check->valid($email, $password);
 
-if($is_valid==true){
-    $check->now_login($email,$password,$db);
+if($is_valid==true){   //if all email and pass are valid
+    $check->now_count($email,$password,$db);  //check for email and password
 }
 else{
     echo '<script type ="text/JavaScript">';  
