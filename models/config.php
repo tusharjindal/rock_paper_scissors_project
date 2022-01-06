@@ -13,7 +13,6 @@ class data{
         $db = mysqli_connect($dbserver, $dbusername, $dbpassword, $database, $port);
 
         if ($db) {
-            //echo "Success";
             return $db;
         } 
         else 
