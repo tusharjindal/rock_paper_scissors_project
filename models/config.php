@@ -1,7 +1,25 @@
 <?php
- $user = "root";
- $pass = "";
- $db= "project";
- $db = new mysqli('localhost', $user, $pass,$db) or die("Connection failed");
- //echo "connected";
+
+class data{
+
+    function connect()
+    {
+        $dbserver = "localhost";
+        $dbusername = "root";
+        $dbpassword = "";
+        $database = "project";
+        $port = 3306;
+
+        $db = mysqli_connect($dbserver, $dbusername, $dbpassword, $database, $port);
+
+        if ($db) {
+            //echo "Success";
+            return $db;
+        } 
+        else 
+        {
+            die("error" . mysqli_connect_error());
+        }
+    }
+}
 ?>

@@ -1,25 +1,21 @@
 <?php
-require_once("config.php");
-require_once("database.php");
-class user{
+//require_once("config.php");
 
-    function __construct(){
-        $temp=new data();
-    }
+class user extends data{
 
-    function get_count($email,$db){
+    function get_count($email){
 
         $email_already="SELECT COUNT(*) FROM user where email='$email'";
-        $run_qry_email=mysqli_query($db, $email_already) or die( mysqli_error($db));
-        $row_email=mysqli_fetch_assoc($run_qry_email);
-        return $row_email['COUNT(*)'];
+        $result  = mysqli_query($this->connect(), $email_already);
+        $num = mysqli_num_rows($result);
+        return $num;
     }
 
-    function get_password($email,$db){
+    function get_password($email){
 
         $email_alreadyy="SELECT `password` FROM user where email='$email'";
-        $run_qry_emaill=mysqli_query($db, $email_alreadyy) or die( mysqli_error($db));
-        $row_emaill=mysqli_fetch_assoc($run_qry_emaill);
+        $result  = mysqli_query($this->connect(), $email_alreadyy);
+        $row_emaill=mysqli_fetch_assoc($result);
         return $row_emaill['password'];
     }
         

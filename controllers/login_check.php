@@ -19,18 +19,18 @@ class login_done{
     }
 
 
-    function now_count($email,$password,$db){
+    function now_count($email,$password){
         $count=new user();
-        $no_of_email=$count->get_count($email,$db);
+        $no_of_email=$count->get_count($email);
         if($no_of_email==1){
-            $is_pass_valid=$this->valid_pass($email,$password,$db);
+            $is_pass_valid=$this->valid_pass($email,$password);
         }
     }
 
-    function valid_pass($email,$password,$db){
+    function valid_pass($email,$password){
             
         $info=new user();
-        $pass=$info->get_password($email,$db);
+        $pass=$info->get_password($email);
         if ($pass==null){
             return false;
         }
@@ -43,21 +43,6 @@ class login_done{
             echo '</script>';
         }
     }
-
-    // function now_login($email,$password,$db){
-
-    //     $is_pass_valid=$this->valid_pass($email,$password,$db);
-    //     if($is_pass_valid==true){
-    //         header("Location: ../views/home_page.php");
-    //     }
-    //     else{
-    //         echo '<script type ="text/JavaScript">';  
-    //         echo 'alert("Wrong password!")';  
-    //         echo '</script>';
-    //     }
-
-    // }
-
   
 
 }

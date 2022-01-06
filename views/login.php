@@ -13,7 +13,7 @@ $check= new login_done();
 $is_valid=$check->valid($email, $password);
 
 if($is_valid==true){   //if all email and pass are valid
-    $check->now_count($email,$password,$db);  //check for email and password
+    $check->now_count($email,$password,);  //check for email and password
 }
 else{
     echo '<script type ="text/JavaScript">';  
