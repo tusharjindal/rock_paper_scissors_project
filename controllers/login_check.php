@@ -1,23 +1,6 @@
 <?php
 require_once ("../models/user_mod.php");
 class login_done{
- 
-
-    function valid($email, $password){
-
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)==0){
-            return false;
-        }
-
-        elseif(empty($email) || empty($password)){
-            return false;
-        }
-
-        else{
-            return true;
-        }
-    }
-
 
     function now_count($email,$password){
         $count=new user();

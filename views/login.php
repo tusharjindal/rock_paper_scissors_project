@@ -1,28 +1,5 @@
 <?php
-require_once ("../models/config.php");
-require_once ("../controllers/login_check.php");
-require_once ("../models/user_mod.php");
 session_start();
-////post method
-if ($_SERVER["REQUEST_METHOD"]== "POST"){
-$email = $_POST['email'];  
-$password = $_POST['pass'];  
-
-///function to check validation
-$check= new login_done();
-$is_valid=$check->valid($email, $password);
-
-if($is_valid==true){   //if all email and pass are valid
-    $check->now_count($email,$password,);  //check for email and password
-}
-else{
-    echo '<script type ="text/JavaScript">';  
-    echo 'alert("Kindly enter valid email or password!!")';  
-    echo '</script>';
-}
-
-
-}
 ?>
 
 <html>
@@ -34,7 +11,7 @@ else{
 </head>
 <body> 
 <div class="container">
-   <form name="Login" action = " " onsubmit = "return check()" method = "POST">  
+   <form name="Login" action = "../middleware/middleware.php" method = "POST">  
            <h1>Login</h1>
             <div class="form-group">  
                 <label> Email: </label>  
